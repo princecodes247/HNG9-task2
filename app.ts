@@ -44,7 +44,7 @@ app.post("/compute", async (req: Request, res: Response) => {
       Operation.ADDITION,
       Operation.MULTIPLICATION,
       Operation.SUBTRACTION,
-    ].includes(operation_type.toString().toLowercase())
+    ].includes(operation_type.toString().toLowerCase())
   ) {
     console.log("predicting");
     const predictionArray = (await predictOperation(operation_type)).split(",");
