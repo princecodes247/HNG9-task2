@@ -34,7 +34,6 @@ app.use(express.json());
 
 app.get("/", (_, res: Response) => {
   res.send("Hello World");
-  predictOperation("");
 });
 
 app.post("/compute", async (req: Request, res: Response) => {
