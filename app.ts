@@ -52,7 +52,7 @@ app.post("/compute", async (req: Request, res: Response) => {
     const predictionArray = (await predictOperation(operation_type)).split(",");
     console.log(predictionArray[0]);
 
-    operation_type = predictionArray[0];
+    operation_type = predictionArray[0]?.trim();
     if (predictionArray.length > 1) {
       const result = predictionArray[1]?.trim();
       res.json({
@@ -60,6 +60,7 @@ app.post("/compute", async (req: Request, res: Response) => {
         result,
         operation_type,
       });
+      return res;
     }
   }
   x = parseInt(x) || 0;
