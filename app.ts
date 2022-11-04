@@ -49,8 +49,8 @@ app.post("/compute", async (req: Request, res: Response) => {
     ].includes(operation_type.toString().toLowerCase())
   ) {
     console.log("predicting");
-    const predictionArray = (await predictOperation(operation_type)).split(",");
-    console.log(predictionArray[0]);
+    const prediction = await predictOperation(operation_type);
+    const predictionArray = prediction.split(",");
 
     operation_type = predictionArray[0]?.trim();
     if (predictionArray.length > 1) {
