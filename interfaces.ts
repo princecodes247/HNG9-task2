@@ -9,10 +9,14 @@ interface IRequest {
   x: number;
   y: number;
 }
-interface IResult {
-  slackUsername: string;
+
+interface ISolution {
   result: number;
   operation_type: Operation;
 }
 
-export { IRequest, IResult, Operation };
+interface IResult extends ISolution {
+  slackUsername: string;
+}
+
+export { IRequest, IResult, ISolution, Operation };

@@ -1,10 +1,10 @@
-import { IResult, Operation } from "../interfaces";
+import { ISolution, Operation } from "../interfaces";
 
 export const solve = (
   x: number,
   y: number,
   operation_type: Operation
-): IResult => {
+): ISolution => {
   let result: number;
   // Make sure x and y are numbers
 
@@ -21,11 +21,11 @@ export const solve = (
       result = x * y;
       break;
     default:
-      throw new Error("Invalid operation type");
+      console.log("Invalid operation", operation_type, x, y);
+      result = 0;
   }
 
   return {
-    slackUsername: "princecodes247",
     result,
     operation_type,
   };

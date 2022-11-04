@@ -32,6 +32,8 @@ app.use(
 app.use(compression());
 app.use(express.json());
 
+const slackUsername = "princecodes247";
+
 app.get("/", (_, res: Response) => {
   res.send("Hello World");
 });
@@ -48,10 +50,16 @@ app.post("/compute", async (req: Request, res: Response) => {
   ) {
     console.log("predicting");
     const predictionArray = (await predictOperation(operation_type)).split(",");
+    console.log(predictionArray[0]);
+
     operation_type = predictionArray[0];
     if (predictionArray.length > 1) {
-      x = predictionArray[1];
-      y = predictionArray[2];
+      const result = predictionArray[1]?.trim();
+      res.json({
+        slackUsername,
+        result,
+        operation_type,
+      });
     }
   }
   x = parseInt(x) || 0;
@@ -59,7 +67,7 @@ app.post("/compute", async (req: Request, res: Response) => {
   console.log("solving");
 
   const result = solve(x, y, operation_type);
-  res.json(result);
+  res.json({ slackUsername, ...result });
 });
 
 /**
